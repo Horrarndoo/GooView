@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.PointF;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
@@ -43,6 +44,11 @@ public class GooViewListener implements OnTouchListener, OnDisappearListener {
         mWm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mParams = new WindowManager.LayoutParams();
         mParams.format = PixelFormat.TRANSLUCENT;//使窗口支持透明度
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            mParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+        }
+
         mHandler = new Handler(mContext.getMainLooper());
     }
 
